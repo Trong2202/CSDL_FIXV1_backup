@@ -6,7 +6,7 @@ from app.controllers.tong_quan_controller import router as priceboard_router, se
 from app.controllers.information_controller import router as information_router
 from app.controllers.analytics_controller import router as analytics_router
 from app.controllers.report_controller import router as report_router
-from app.controllers.stock_controller import router as stock_router
+from app.controllers.stock_controller import router as stock_router, get_stock
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -16,7 +16,7 @@ setup_stock_websocket_routes(app)
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request, bank_code: str = "VCB"):
-    return await get_home(request, bank_code)
+    return await get_stock(request, bank_code)
 
 @app.get("/priceboard", response_class=HTMLResponse)
 async def priceboard_html(request: Request):
