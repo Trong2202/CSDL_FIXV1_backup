@@ -15,6 +15,9 @@ symbols = [
 
 @router.get("/stock", response_class=HTMLResponse)
 async def get_stock(request: Request, bank_code: str = "VCB") -> HTMLResponse:
+    return await get_home(request, bank_code)
+
+async def get_home(request: Request, bank_code: str = "VCB") -> HTMLResponse:
     model = StockModel(bank_code)
     try:
         company_profile, key_developments = model.get_company_profile()
@@ -25,16 +28,26 @@ async def get_stock(request: Request, bank_code: str = "VCB") -> HTMLResponse:
 
     # Thêm dữ liệu giá
     try:
-        price_data = model.get_saved_transactions()
+        # Lấy dữ liệu real-time
+        realtime_data = model.get_realtime_data()
+        is_realtime = bool(realtime_data)
+
+        if is_realtime:
+            price_data = realtime_data
+        else:
+            price_data = model.get_saved_transactions()
+
         # Lấy thông tin cổ phiếu mới nhất
         stock_info: Dict[str, Any] = {}
         if price_data:
             stock_info = dict(price_data[0])  # Convert to dict if it's not already
             stock_info['symbol'] = bank_code
             stock_info['company_name'] = model.company.company.profile()['company_name'].iloc[0]
-    except Exception:
+    except Exception as e:
+        print(f"Lỗi khi lấy dữ liệu giá: {e}")
         price_data = []
         stock_info = {}
+        is_realtime = False
 
     return templates.TemplateResponse("stock.html", {
         "request": request,

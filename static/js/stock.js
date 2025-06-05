@@ -47,4 +47,6 @@ async function updateStock() {
     } catch (error) {
         console.error('Error loading stock data:', error);
     }
+
 }
+

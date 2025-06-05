@@ -16,6 +16,8 @@ class StockModel:
         self.company = Vnstock().stock(symbol=symbol, source='TCBS')
         self.quote = Vnstock().stock(symbol=symbol, source='VCI')
 
+        # df = stock.finance.income_statement(period='year',lang='vi',dropna=True)
+
     # Phần đã có
     def get_company_profile(self):
         df = self.company.company.profile()
@@ -35,11 +37,13 @@ class StockModel:
     # Phần thêm vào
     def get_realtime_data(self):
         today = datetime.today().strftime('%Y-%m-%d')
-        df = self.quote.quote.history(start="2025-05-04", end=today).sort_values("time", ascending=False)
+        df = self.quote.quote.history(start="2020-01-04", end=today).sort_values("time", ascending=False)
         df["change"] = df["close"].diff(-1).fillna(0)
         df["percent_change"] = df["change"] / df["close"].shift(-1).fillna(1) * 100
         df["change"] = df["change"].round(2)
         df["percent_change"] = df["percent_change"].round(2)
+        df["time"] = df["time"].dt.strftime('%Y-%m-%d') # thêm dòng này
+
         return df.to_dict(orient="records")
 
     def get_saved_transactions(self):
