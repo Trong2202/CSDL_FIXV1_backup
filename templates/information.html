@@ -118,7 +118,7 @@
 
                     <div class="form-group">
                         <label for="line">Chọn chỉ tiêu để vẽ biểu đồ:</label>
-                        <select id="line"></select>
+                        <select id="line">Chọn chỉ tiêu</select>
                     </div>
                 </div>
 
@@ -130,6 +130,8 @@
                 <!-- Phần hiển thị dữ liệu -->
                 <div class="data-container">
                     <h3>Kết quả báo cáo:</h3>
+                    <button onclick="exportToExcel()">Xuất Excel</button>
+
                     <div id="data-table"></div>
                 </div>
             </div>
@@ -144,9 +146,11 @@
     </div>
 
     <script src="/static/js/index.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
     <script src="/static/js/information.js"></script>
     <script src="/static/js/sidebar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
 </body>
 
 </html>

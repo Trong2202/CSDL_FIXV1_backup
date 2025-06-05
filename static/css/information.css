@@ -250,6 +250,12 @@ td {
 #main #data-table tr:hover td {
   background: var(--color-light);
 }
+#main #data-table tr.highlight-row td {
+  font-weight: bold;
+  color: var(--color-primary); /* hoặc bạn có thể dùng màu khác như 'green', '#FF5733' */
+  background-color: #f8f9ff; /* nhẹ nhàng cho nổi bật */
+}
+
 
 /* Modal biểu đồ */
 #main .overlay {
@@ -294,6 +300,14 @@ td {
   color: var(--color-white);
   padding: 0.6rem 1.2rem;
   min-width: auto;
+}
+#main .chart-modal canvas {
+    z-index: 1; /* Đảm bảo canvas không che tooltip */
+}
+#main select[multiple] {
+    height: auto; /* Tự điều chỉnh chiều cao theo size */
+    min-height: 100px; /* Đảm bảo đủ không gian hiển thị */
+    padding: 0.5rem;
 }
 
 /* Responsive */
