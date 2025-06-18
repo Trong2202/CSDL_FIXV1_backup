@@ -57,7 +57,6 @@ td {
   background: var(--color-white);
   padding: var(--card-padding);
   border-radius: var(--card-border-radius);
-  box-shadow: var(--box-shadow);
   margin-top: 2rem;
   width: 100%;
   overflow: hidden;
@@ -128,7 +127,7 @@ td {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 2rem 0;
+  /* margin: 2rem 0; */
 }
 
 #main button {
@@ -141,7 +140,7 @@ td {
   font-weight: 600;
   transition: all 0.3s ease;
   width: auto;
-  min-width: 200px;
+  max-width: 200px;
   position: relative;
   overflow: hidden;
 }
@@ -158,10 +157,10 @@ td {
 
 /* Phần hiển thị dữ liệu */
 #main .data-container {
-  margin-top: 2rem;
-  background: var(--color-background);
+  place-items: center;
+  display: grid;
+  /* margin-top: 2rem; */
   width: 100%;
-  overflow: hidden;
 }
 
 #main h3 {
@@ -250,10 +249,13 @@ td {
 #main #data-table tr:hover td {
   background: var(--color-light);
 }
+
 #main #data-table tr.highlight-row td {
   font-weight: bold;
-  color: var(--color-primary); /* hoặc bạn có thể dùng màu khác như 'green', '#FF5733' */
-  background-color: #f8f9ff; /* nhẹ nhàng cho nổi bật */
+  color: var(--color-primary);
+  /* hoặc bạn có thể dùng màu khác như 'green', '#FF5733' */
+  background-color: #f8f9ff;
+  /* nhẹ nhàng cho nổi bật */
 }
 
 
@@ -301,13 +303,18 @@ td {
   padding: 0.6rem 1.2rem;
   min-width: auto;
 }
+
 #main .chart-modal canvas {
-    z-index: 1; /* Đảm bảo canvas không che tooltip */
+  z-index: 1;
+  /* Đảm bảo canvas không che tooltip */
 }
+
 #main select[multiple] {
-    height: auto; /* Tự điều chỉnh chiều cao theo size */
-    min-height: 100px; /* Đảm bảo đủ không gian hiển thị */
-    padding: 0.5rem;
+  height: auto;
+  /* Tự điều chỉnh chiều cao theo size */
+  min-height: 100px;
+  /* Đảm bảo đủ không gian hiển thị */
+  padding: 0.5rem;
 }
 
 /* Responsive */
