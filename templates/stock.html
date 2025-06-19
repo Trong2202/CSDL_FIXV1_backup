@@ -13,7 +13,7 @@
     style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
     <div style="display: flex; flex-direction: column; gap: 1rem; padding-left: 4rem;">
         <h2 style="font-weight: bold;font-size: 2rem;">Thông tin cổ phiếu ngân hàng</h2>
-        <form method="get" action="/">
+        <form method="get" action="/stock">
             <label for="bank_code">Chọn mã cổ phiếu:</label>
             <select name="bank_code" onchange="this.form.submit()">
                 {% for sym in bank_codes %}
