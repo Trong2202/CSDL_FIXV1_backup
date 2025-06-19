@@ -99,8 +99,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Exact match
         if (linkPath === currentPath) return true;
         
-        // Special case for home page
-        if (linkPath === '/' && currentPath === '/priceboard') return true;
+        // Special case for home page - when at "/" show priceboard as active
+        if (linkPath === '/priceboard' && currentPath === '/') return true;
         
         // Check if current path starts with link path (for sub-pages)
         if (linkPath !== '/' && currentPath.startsWith(linkPath)) return true;

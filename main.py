@@ -26,9 +26,9 @@ templates = Jinja2Templates(directory="templates")
 setup_stock_websocket_routes(app)
 
 @app.get("/", response_class=HTMLResponse)
-async def home(request: Request, bank_code: str = "VCB"):
-    """Trang chủ hiển thị thông tin cổ phiếu (stock page)"""
-    return await get_home(request, bank_code)
+async def home(request: Request):
+    """Trang chủ hiển thị priceboard (thị trường)"""
+    return templates.TemplateResponse("priceboard.html", {"request": request})
 
 @app.get("/priceboard", response_class=HTMLResponse)
 async def priceboard_html(request: Request):

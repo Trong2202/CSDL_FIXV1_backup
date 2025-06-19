@@ -61,12 +61,11 @@
 
 /* Stock table scroll container */
 .stock-scroll-container {
-    max-height: 400px;
+    max-height: 500px;
     overflow-y: auto;
     border: 1px solid var(--color-light);
-    border-radius: var(--card-border-radius);
+    /* border-radius: var(--card-border-radius); */
     background: var(--color-white);
-    box-shadow: var(--box-shadow);
 }
 
 /* Custom scrollbar for stock table */
