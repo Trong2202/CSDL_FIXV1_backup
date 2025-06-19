@@ -2,106 +2,151 @@
   "health_check": {
     "endpoint": "/health",
     "iterations": 3,
+    "avg_response_time_ms": 4.923184712727864,
+    "min_response_time_ms": 2.5315284729003906,
+    "max_response_time_ms": 9.317636489868164,
+    "median_response_time_ms": 2.920389175415039,
     "errors": 3,
-    "success_rate": 0,
-    "error": "All requests failed"
-  },
-  "info_stocks": {
-    "endpoint": "/api/stocks",
-    "iterations": 3,
-    "errors": 3,
-    "success_rate": 0,
-    "error": "All requests failed"
-  },
-  "financial_88": {
-    "endpoint": "/api/financial/chart-data/88",
-    "iterations": 3,
-    "errors": 3,
-    "success_rate": 0,
-    "error": "All requests failed"
+    "success_rate": 0.0
   },
   "stock_profile": {
     "endpoint": "/api/stock/VCB/profile",
     "iterations": 3,
+    "avg_response_time_ms": 4.194021224975586,
+    "min_response_time_ms": 3.0303001403808594,
+    "max_response_time_ms": 5.163431167602539,
+    "median_response_time_ms": 4.388332366943359,
     "errors": 3,
-    "success_rate": 0,
-    "error": "All requests failed"
+    "success_rate": 0.0
   },
   "batch_batch": {
     "endpoint": "/api/stocks/batch?symbols=VCB,BID,CTG,TCB,MBB",
     "iterations": 3,
+    "avg_response_time_ms": 175.13291041056314,
+    "min_response_time_ms": 2.710580825805664,
+    "max_response_time_ms": 512.3863220214844,
+    "median_response_time_ms": 10.301828384399414,
     "errors": 3,
-    "success_rate": 0,
-    "error": "All requests failed"
+    "success_rate": 0.0
   },
-  "batch_all": {
-    "endpoint": "/api/index/all",
+  "financial_88": {
+    "endpoint": "/api/financial/chart-data/88",
     "iterations": 3,
-    "errors": 3,
-    "success_rate": 0,
-    "error": "All requests failed"
-  },
-  "info_report_types": {
-    "endpoint": "/api/report_types",
-    "iterations": 3,
-    "errors": 3,
-    "success_rate": 0,
-    "error": "All requests failed"
-  },
-  "financial_market-cap": {
-    "endpoint": "/api/market-cap",
-    "iterations": 3,
-    "errors": 3,
-    "success_rate": 0,
-    "error": "All requests failed"
+    "avg_response_time_ms": 176.18409792582193,
+    "min_response_time_ms": 2.7997493743896484,
+    "max_response_time_ms": 522.4623680114746,
+    "median_response_time_ms": 3.2901763916015625,
+    "errors": 0,
+    "success_rate": 100.0
   },
   "stock_price": {
     "endpoint": "/api/stock/VCB/price",
     "iterations": 3,
+    "avg_response_time_ms": 172.50696818033853,
+    "min_response_time_ms": 3.0286312103271484,
+    "max_response_time_ms": 511.3098621368408,
+    "median_response_time_ms": 3.1824111938476562,
     "errors": 3,
-    "success_rate": 0,
-    "error": "All requests failed"
+    "success_rate": 0.0
   },
-  "info_line_items": {
-    "endpoint": "/api/line_items?report_type_id=1",
+  "financial_market-cap": {
+    "endpoint": "/api/market-cap",
     "iterations": 3,
-    "errors": 3,
-    "success_rate": 0,
-    "error": "All requests failed"
-  },
-  "financial_total": {
-    "endpoint": "/api/capital/total",
-    "iterations": 3,
-    "errors": 3,
-    "success_rate": 0,
-    "error": "All requests failed"
+    "avg_response_time_ms": 3.7210782368977866,
+    "min_response_time_ms": 2.3598670959472656,
+    "max_response_time_ms": 5.047082901000977,
+    "median_response_time_ms": 3.756284713745117,
+    "errors": 0,
+    "success_rate": 100.0
   },
   "stock_officers": {
     "endpoint": "/api/stock/VCB/officers",
     "iterations": 3,
+    "avg_response_time_ms": 3.4505526224772134,
+    "min_response_time_ms": 2.5446414947509766,
+    "max_response_time_ms": 5.202531814575195,
+    "median_response_time_ms": 2.6044845581054688,
     "errors": 3,
-    "success_rate": 0,
-    "error": "All requests failed"
+    "success_rate": 0.0
   },
-  "info_financial_data": {
-    "endpoint": "/api/financial_data?symbol=VCB&report_type_id=1&period=yearly",
+  "financial_total": {
+    "endpoint": "/api/capital/total",
     "iterations": 3,
-    "errors": 3,
-    "success_rate": 0,
-    "error": "All requests failed"
+    "avg_response_time_ms": 80.84750175476074,
+    "min_response_time_ms": 3.3333301544189453,
+    "max_response_time_ms": 235.60571670532227,
+    "median_response_time_ms": 3.6034584045410156,
+    "errors": 0,
+    "success_rate": 100.0
   },
   "stock_shareholders": {
     "endpoint": "/api/stock/VCB/shareholders",
     "iterations": 3,
+    "avg_response_time_ms": 80.61854044596355,
+    "min_response_time_ms": 2.988576889038086,
+    "max_response_time_ms": 235.19110679626465,
+    "median_response_time_ms": 3.6759376525878906,
     "errors": 3,
-    "success_rate": 0,
-    "error": "All requests failed"
+    "success_rate": 0.0
   },
   "financial_news": {
     "endpoint": "/api/news",
     "iterations": 3,
-    "errors": 3,
-    "success_rate": 0,
-    "error": "All requests failed"
+    "avg_response_time_ms": 6.472349166870117,
+    "min_response_time_ms": 5.988597869873047,
+    "max_response_time_ms": 7.233619689941406,
+    "median_response_time_ms": 6.194829940795898,
+    "errors": 0,
+    "success_rate": 100.0
+  },
+  "batch_all": {
+    "endpoint": "/api/index/all",
+    "iterations": 3,
+    "avg_response_time_ms": 182.35015869140625,
+    "min_response_time_ms": 104.47096824645996,
+    "max_response_time_ms": 251.91164016723633,
+    "median_response_time_ms": 190.66786766052246,
+    "errors": 0,
+    "success_rate": 100.0
+  },
+  "info_stocks": {
+    "endpoint": "/api/stocks",
+    "iterations": 3,
+    "avg_response_time_ms": 386.0770066579183,
+    "min_response_time_ms": 86.72881126403809,
+    "max_response_time_ms": 905.5283069610596,
+    "median_response_time_ms": 165.97390174865723,
+    "errors": 0,
+    "success_rate": 100.0
+  },
+  "info_report_types": {
+    "endpoint": "/api/report_types",
+    "iterations": 3,
+    "avg_response_time_ms": 111.84954643249512,
+    "min_response_time_ms": 84.6867561340332,
+    "max_response_time_ms": 165.16351699829102,
+    "median_response_time_ms": 85.69836616516113,
+    "errors": 0,
+    "success_rate": 100.0
+  },
+  "info_line_items": {
+    "endpoint": "/api/line_items?report_type_id=1",
+    "iterations": 3,
+    "avg_response_time_ms": 143.97716522216797,
+    "min_response_time_ms": 87.02921867370605,
+    "max_response_time_ms": 179.53801155090332,
+    "median_response_time_ms": 165.36426544189453,
+    "errors": 0,
+    "success_rate": 100.0
+  },
+  "info_financial_data": {
+    "endpoint": "/api/financial_data?symbol=VCB&report_type_id=1&period=yearly",
+    "iterations": 3,
+    "avg_response_time_ms": 464.24277623494464,
+    "min_response_time_ms": 418.90406608581543,
+    "max_response_time_ms": 501.2655258178711,
+    "median_response_time_ms": 472.55873680114746,
+    "errors": 0,
+    "success_rate": 100.0
   }
 }
