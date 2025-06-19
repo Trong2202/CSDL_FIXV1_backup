@@ -31,15 +31,15 @@
 
 <!-- Tab: Treemap Vốn hóa -->
 <div id="tab-tree-map" class="tab-content">
-  <h1>Biểu đồ Treemap - Vốn hóa Thị trường Q4/2024 </h1>
+  <h1>Biểu đồ Treemap - Vốn hóa Thị trường <span class="period-text">(Q4/2024)</span></h1>
   <div id="loading-treemap">Đang tải dữ liệu...</div>
   <div id="error-treemap"></div>
-  <div id="treemap"></div>
+  <div id="treemap" class="plot-container plotly"></div>
 </div>
 
 <!-- Tab: Biểu đồ tròn -->
 <div id="tab-bieu-do-tron" class="tab-content">
-  <h1>Biểu đồ Tài chính Cổ phiếu (Q4/2024)</h1>
+  <h1>Biểu đồ Tài chính Cổ phiếu <span class="period-text">(Q4/2024)</span></h1>
   <div class="buttons" id="metricButtons"></div>
   <div id="loading" class="status-indicator" style="display: none;">Đang tải dữ liệu từ API...</div>
   <div id="error" class="status-indicator"></div>
@@ -52,7 +52,7 @@
 <!-- Tab: Bảng giá -->
 <div id="tab-bang-gia" class="tab-content">
   <h1>Dữ liệu Chứng khoán Trực tiếp</h1>
-  <div id="stock-table-container">
+  <div id="stock-table-container" class="stock-scroll-container">
     <table>
       <thead>
         <tr>

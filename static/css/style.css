@@ -404,7 +404,7 @@ main table tbody td {
     justify-content: center;
     align-items: center;
     padding: 2rem;
-    font-size: 1.2rem;  
+    font-size: 1.2rem;
     color: var(--color-primary);
     background: var(--color-background);
     border-radius: var(--card-border-radius);
@@ -626,15 +626,18 @@ main .stock_table {
 }
 
 .change.positive {
-    color: var(--color-success);
+    color: var(--color-success) !important;
+    font-weight: bold !important;
 }
 
 .change.negative {
-    color: var(--color-danger);
+    color: var(--color-danger) !important;
+    font-weight: bold !important;
 }
 
 .change.neutral {
-    color: var(--color-info-dark);
+    color: var(--color-info-dark) !important;
+    font-weight: normal !important;
 }
 
 .volume-info {

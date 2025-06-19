@@ -1,4 +1,3 @@
-
 .header-blue {
     color: var(--color-primary);
     font-weight: bold;
@@ -13,6 +12,7 @@
     background-color: var(--color-white);
     box-shadow: var(--box-shadow);
     overflow-y: auto;
+    padding: 1rem;
 }
 
 .box pre {
@@ -21,6 +21,48 @@
     margin: 0;
     padding: 10px;
     max-width: 100%;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--color-dark);
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.box h1,
+.box h2,
+.box h3 {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: var(--color-dark);
+    margin-bottom: 1rem;
+}
+
+.box p {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: var(--color-dark-variant);
+    line-height: 1.6;
+    text-align: justify;
+    margin-bottom: 0.5rem;
+}
+
+.box table {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.box table th,
+.box table td {
+    text-align: center;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--color-light);
+    font-size: 0.88rem;
+}
+
+.box table th {
+    background-color: var(--color-background);
+    color: var(--color-dark);
+    font-weight: 600;
 }
 
 .box::-webkit-scrollbar {
@@ -41,31 +83,105 @@
     background: var(--color-dark-variant);
 }
 
+/* Color classes for table values - Fixed priority */
+.positive {
+    color: var(--color-success) !important;
+    font-weight: bold !important;
+}
+
+.negative {
+    color: var(--color-danger) !important;
+    font-weight: bold !important;
+}
+
+.neutral {
+    color: var(--color-dark-variant) !important;
+    font-weight: normal !important;
+}
+
+/* Dark mode compatibility - excluding color value cells */
+.dark-mode-variables .box {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-light);
+}
+
+.dark-mode-variables .box pre {
+    color: var(--color-dark);
+}
+
+.dark-mode-variables .box h1,
+.dark-mode-variables .box h2,
+.dark-mode-variables .box h3 {
+    color: var(--color-dark);
+}
+
+.dark-mode-variables .box p {
+    color: var(--color-dark-variant);
+}
+
+.dark-mode-variables .box table th {
+    background-color: var(--color-background);
+    color: var(--color-dark);
+}
+
+/* Dark mode for table cells - but NOT for positive/negative/neutral classes */
+.dark-mode-variables .box table td:not(.positive):not(.negative):not(.neutral) {
+    color: var(--color-dark);
+}
+
+.dark-mode-variables select {
+    background-color: var(--color-white);
+    color: var(--color-dark);
+    border: 1px solid var(--color-light);
+}
+
+.dark-mode-variables th {
+    background-color: var(--color-background);
+    color: var(--color-dark);
+}
+
+/* Dark mode for table cells - but NOT for positive/negative/neutral classes */
+.dark-mode-variables td:not(.positive):not(.negative):not(.neutral) {
+    color: var(--color-dark);
+}
+
 select {
     font-size: 16px;
     padding: 6px;
     margin-bottom: 20px;
     border-radius: var(--border-radius-1);
     border: 1px solid var(--color-light);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: var(--color-white);
+    color: var(--color-dark);
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
 th,
 td {
     padding: 6px 10px;
     text-align: center;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 0.88rem;
 }
 
+th {
+    background-color: var(--color-background);
+    color: var(--color-dark);
+    font-weight: 600;
+}
 
 .section-title {
     margin-top: 30px;
     font-weight: bold;
     color: var(--color-dark);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
 .chart-container {
@@ -78,6 +194,7 @@ td {
     /* background-color: var(--color-white); */
     padding: var(--card-padding);
     /* border-radius: var(--card-border-radius); */
+    font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
 .symbol-info {
@@ -85,6 +202,7 @@ td {
     font-weight: bold;
     color: var(--color-dark);
     margin-bottom: 5px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
 .exchange {
@@ -97,6 +215,7 @@ td {
     font-size: 18px;
     color: var(--color-dark-variant);
     margin-bottom: 15px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
 .price-info {
@@ -104,6 +223,7 @@ td {
     font-weight: bold;
     color: var(--color-dark);
     margin-bottom: 10px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
 .change {
@@ -111,6 +231,7 @@ td {
     margin-left: 10px;
     padding: 4px 8px;
     border-radius: var(--border-radius-1);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
 .change.positive {
@@ -131,9 +252,11 @@ td {
 .volume-info {
     font-size: 16px;
     color: var(--color-dark-variant);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
 .no-data {
     color: var(--color-info-dark);
     font-style: italic;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
 }

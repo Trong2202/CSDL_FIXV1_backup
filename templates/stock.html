@@ -37,7 +37,8 @@
         <div class="price-info">
             {{ stock_info.close | round(2) }}
             {% if stock_info.percent_change is not none %}
-            <span class="change {% if stock_info.percent_change > 0 %}positive{% elif stock_info.percent_change < 0 %}negative{% else %}neutral{% endif %}">
+            <span
+                class="change {% if stock_info.percent_change > 0 %}positive{% elif stock_info.percent_change < 0 %}negative{% else %}neutral{% endif %}">
                 {% if stock_info.percent_change > 0 %}+{% endif %}{{ stock_info.percent_change | round(2) }}%
             </span>
             {% else %}
@@ -80,7 +81,8 @@
 </div>
 
 <div class="header box">
-    <p style="font-size: 1.8rem;padding: 1rem;color: var(--color-primary);font-weight: bold;">Bảng giá cổ phiếu {{ selected }}</p>
+    <p style="font-size: 1.8rem;padding: 1rem;color: var(--color-primary);font-weight: bold;">Bảng giá cổ phiếu {{
+        selected }}</p>
     <table>
         <thead>
             <tr>
@@ -102,9 +104,19 @@
                 <td>{{ row.high }}</td>
                 <td>{{ row.low }}</td>
                 <td>{{ row.close }}</td>
-                <td>{{ row.volume }}</td>
-                <td>{{ row.change if row.change is not none else '-' }}</td>
-                <td>{{ row.percent_change if row.percent_change is not none else '-' }}%</td>
+                <td>{{ "{:,.0f}".format(row.volume) if row.volume else '-' }}</td>
+                <td
+                    class="{% if row.change and row.change > 0 %}positive{% elif row.change and row.change < 0 %}negative{% else %}neutral{% endif %}">
+                    {% if row.change %}
+                    {% if row.change > 0 %}+{% endif %}{{ row.change | round(2) }}
+                    {% else %}-{% endif %}
+                </td>
+                <td
+                    class="{% if row.percent_change and row.percent_change > 0 %}positive{% elif row.percent_change and row.percent_change < 0 %}negative{% else %}neutral{% endif %}">
+                    {% if row.percent_change %}
+                    {% if row.percent_change > 0 %}+{% endif %}{{ row.percent_change | round(2) }}%
+                    {% else %}-{% endif %}
+                </td>
             </tr>
             {% endfor %}
         </tbody>
@@ -122,76 +134,77 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Lấy dữ liệu từ Jinja2 template
-        const priceData = {{ price_data | tojson | safe }};
+        const priceData = {{ price_data | tojson | safe
+    }};
 
-        // Chuẩn bị dữ liệu cho biểu đồ
-        const dates = priceData.map(item => item.time.substring(0, 10));
-        const closePrices = priceData.map(item => item.close);
-        const volumes = priceData.map(item => item.volume);
+    // Chuẩn bị dữ liệu cho biểu đồ
+    const dates = priceData.map(item => item.time.substring(0, 10));
+    const closePrices = priceData.map(item => item.close);
+    const volumes = priceData.map(item => item.volume);
 
-        // Tạo biểu đồ nến
-        const trace = {
-            x: dates,
-            close: closePrices,
-            high: priceData.map(item => item.high),
-            low: priceData.map(item => item.low),
-            open: priceData.map(item => item.open),
-            type: 'candlestick',
-            name: 'Giá',
-            yaxis: 'y2',
-            increasing: { line: { color: '#26a69a' } },
-            decreasing: { line: { color: '#ef5350' } }
-        };
+    // Tạo biểu đồ nến
+    const trace = {
+        x: dates,
+        close: closePrices,
+        high: priceData.map(item => item.high),
+        low: priceData.map(item => item.low),
+        open: priceData.map(item => item.open),
+        type: 'candlestick',
+        name: 'Giá',
+        yaxis: 'y2',
+        increasing: { line: { color: '#26a69a' } },
+        decreasing: { line: { color: '#ef5350' } }
+    };
 
-        const volumeTrace = {
-            x: dates,
-            y: volumes,
-            type: 'bar',
-            name: 'Khối lượng',
-            yaxis: 'y',
-            marker: {
-                color: 'rgba(0, 123, 255, 0.5)'
+    const volumeTrace = {
+        x: dates,
+        y: volumes,
+        type: 'bar',
+        name: 'Khối lượng',
+        yaxis: 'y',
+        marker: {
+            color: 'rgba(0, 123, 255, 0.5)'
+        }
+    };
+
+    const layout = {
+        title: 'Biểu đồ giá cổ phiếu {{ selected }}',
+        yaxis: {
+            title: 'Khối lượng',
+            domain: [0, 0.2]
+        },
+        yaxis2: {
+            title: 'Giá (VND)',
+            domain: [0.2, 1]
+        },
+        xaxis: {
+            rangeslider: {
+                visible: false
             }
-        };
+        },
+        showlegend: true,
+        legend: {
+            x: 0,
+            y: 1
+        },
+        margin: {
+            l: 50,
+            r: 50,
+            b: 50,
+            t: 50,
+            pad: 4
+        }
+    };
 
-        const layout = {
-            title: 'Biểu đồ giá cổ phiếu {{ selected }}',
-            yaxis: {
-                title: 'Khối lượng',
-                domain: [0, 0.2]
-            },
-            yaxis2: {
-                title: 'Giá (VND)',
-                domain: [0.2, 1]
-            },
-            xaxis: {
-                rangeslider: {
-                    visible: false
-                }
-            },
-            showlegend: true,
-            legend: {
-                x: 0,
-                y: 1
-            },
-            margin: {
-                l: 50,
-                r: 50,
-                b: 50,
-                t: 50,
-                pad: 4
-            }
-        };
+    const config = {
+        responsive: true,
+        scrollZoom: true,
+        displayModeBar: true,
+        modeBarButtonsToAdd: ['drawline', 'drawopenpath', 'eraseshape'],
+        modeBarButtonsToRemove: ['lasso2d']
+    };
 
-        const config = {
-            responsive: true,
-            scrollZoom: true,
-            displayModeBar: true,
-            modeBarButtonsToAdd: ['drawline', 'drawopenpath', 'eraseshape'],
-            modeBarButtonsToRemove: ['lasso2d']
-        };
-
-        Plotly.newPlot('priceChart', [trace, volumeTrace], layout, config);
+    Plotly.newPlot('priceChart', [trace, volumeTrace], layout, config);
     });
 </script>
-{% endblock %} 
+{% endblock %}
