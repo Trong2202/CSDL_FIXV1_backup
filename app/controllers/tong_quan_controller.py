@@ -17,30 +17,14 @@ from app.services.tong_quan_service import (
 )
 from app.models.tong_quan_model import MarketCapItem, FinancialDataPoint, StockModel
 from app.config import settings
-from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse
 
 logger = logging.getLogger(__name__)
 
 # --- Router API (JSON) ---
-router_api = APIRouter()
-
-templates = Jinja2Templates(directory="templates")
-
-async def get_home(request: Request, bank_code: str = "VCB"):
-    """
-    Render the home page (priceboard.html) with initial bank data
-    """
-    return templates.TemplateResponse(
-        "priceboard.html",
-        {
-            "request": request,
-            "bank_code": bank_code
-        }
-    )
+router = APIRouter()
 
 # ================= TỔNG VỐN HÓA API =================
-@router_api.get("/capital/total", summary="Tính tổng nguồn vốn cho các cổ phiếu dựa trên tiêu chí")
+@router.get("/capital/total", summary="Tính tổng nguồn vốn cho các cổ phiếu dựa trên tiêu chí")
 def get_total_capital_api_endpoint(
     year: int = Query(2024, description="Năm tài chính, ví dụ: 2023"),
     quarter: str = Query("Q4", description="Quý tài chính, ví dụ: Q1, Q2, Q3, Q4"),
@@ -65,12 +49,12 @@ def get_total_capital_api_endpoint(
         raise HTTPException(status_code=500, detail=f"Lỗi máy chủ nội bộ khi tính toán tổng nguồn vốn: {str(e)}")
 
 # ================= NEWS API =================
-@router_api.get("/news", response_model=List[Dict[str, Any]], summary="Get All News")
+@router.get("/news", response_model=List[Dict[str, Any]], summary="Get All News")
 async def get_news_list():
     news_list = fetch_all_news()
     return news_list
 
-@router_api.get("/news/{news_id}", response_model=Dict[str, Any], summary="Get News By ID")
+@router.get("/news/{news_id}", response_model=Dict[str, Any], summary="Get News By ID")
 async def get_news_item_by_id(news_id: int):
     news_item = fetch_news_by_id(news_id)
     if news_item is None:
@@ -78,7 +62,7 @@ async def get_news_item_by_id(news_id: int):
     return news_item
 
 # ================= MARKET DATA API =================
-@router_api.get("/market-cap", response_model=List[MarketCapItem], summary="Get Market Capitalization Data")
+@router.get("/market-cap", response_model=List[MarketCapItem], summary="Get Market Capitalization Data")
 async def get_market_cap_data_api(
     service: MarketDataService = Depends(get_market_data_service)
 ) -> List[MarketCapItem]:
@@ -103,7 +87,7 @@ async def get_market_cap_data_api(
         raise HTTPException(status_code=500, detail="Internal server error in market data controller")
 
 # ================= FINANCIAL DATA API =================
-@router_api.get(
+@router.get(
     "/financial/chart-data/{line_item_id}",
     response_model=List[FinancialDataPoint],
     summary="Lấy dữ liệu tài chính cho biểu đồ theo Line Item ID"
@@ -127,7 +111,7 @@ async def get_financial_data_for_chart_endpoint(
         raise HTTPException(status_code=500, detail="Internal Server Error in financial data controller")
 
 # ================= INDICES API =================
-@router_api.get("/index/all", summary="Lấy dữ liệu đã xử lý cho tất cả các chỉ số thị trường", response_model=Dict[str, Any])
+@router.get("/index/all", summary="Lấy dữ liệu đã xử lý cho tất cả các chỉ số thị trường", response_model=Dict[str, Any])
 async def get_all_indices_data_logic(index_service: IndexService = Depends(IndexService)) -> Dict[str, Any]:
     logger.info("API request to /index/all")
     try:
@@ -138,7 +122,7 @@ async def get_all_indices_data_logic(index_service: IndexService = Depends(Index
         logger.exception(f"Unexpected error in API endpoint /index/all: {e}")
         raise HTTPException(status_code=500, detail=f"Internal server error while fetching indices data: {str(e)}")
 
-# --- WebSocket Stock Updates giữ nguyên ---
+# --- WebSocket Stock Updates ---
 def setup_stock_websocket_routes(app: FastAPI):
     stock_model = StockModel()
     @app.websocket("/ws/stock-updates")
@@ -197,9 +181,3 @@ def setup_stock_websocket_routes(app: FastAPI):
                     logger.error(f"Error during WebSocket close for {client_host}:{client_port}: {close_error}", exc_info=True)
             else:
                 logger.info(f"WebSocket for {client_host}:{client_port} was already in DISCONNECTED state.")
-
-@router_api.get("/priceboard", response_class=HTMLResponse)
-async def priceboard_html(request):
-    return templates.TemplateResponse("priceboard.html", {"request": request})
-
-router = router_api

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="{% block lang %}vi{% endblock %}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="{% block description %}Đây là trang web phân tích chứng khoán{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}Tài chính, chứng khoán, cổ phiếu, ngân hàng{% endblock %}">
+    <meta name="author" content="{% block author %}Dashboard Finance{% endblock %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Common CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=2">
+    {% block extra_css %}{% endblock %}
+    <link rel="stylesheet" href="/static/css/responsive.css?v=2">
+
+    <!-- Extra head content -->
+    {% block extra_head %}{% endblock %}
+
+    <title>{% block title %}Dashboard Finance{% endblock %}</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <div>
+                <a href="#" class="logo" target="logo">
+                    <img src="/static/images/logo_SSI.jpg">
+                    <h2>Dash<span class="danger">board</span></h2>
+                </a>
+            </div>
+
+            <div class="index_stock layout_template">
+            </div>
+
+            <div class="nav">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">
+                        menu
+                    </span>
+                </button>
+
+                <div class="dark-mode">
+                    <span class="material-icons-sharp active">
+                        light_mode
+                    </span>
+                    <span class="material-icons-sharp">
+                        dark_mode
+                    </span>
+                </div>
+
+                <div class="profile">
+                    {% block profile_content %}{% endblock %}
+                </div>
+            </div>
+        </header>
+        <!-- End of Header Section -->
+
+        <!-- Sidebar Section -->
+        <aside id="navbar">
+            <div class="close" id="close-btn">
+                <span class="material-icons-sharp">
+                    close
+                </span>
+            </div>
+            <nav>
+                <ul class="layout_template sidebar">
+                    <li>
+                        <a href="/priceboard" class="first_icon">
+                            <span class="material-icons-sharp">dashboard</span>
+                            <h3>Price board</h3>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/stock">
+                            <span class="material-icons-sharp">trending_up</span>
+                            <h3>Stock</h3>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/information">
+                            <span class="material-icons-sharp">trending_up</span>
+                            <h3>Information</h3>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/report">
+                            <span class="material-icons-sharp">trending_up</span>
+                            <h3>Report</h3>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/analytics">
+                            <span class="material-icons-sharp">insights</span>
+                            <h3>Analytics</h3>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <!-- End of Sidebar Section -->
+
+        <!-- Main Content -->
+        <main id="main">
+            {% block main_content %}
+            <div class="layout_template">
+                <h1>Nội dung chính</h1>
+                <p>Đây là nội dung mặc định. Vui lòng override block main_content trong template con.</p>
+            </div>
+            {% endblock %}
+        </main>
+        <!-- End of Main Content -->
+    </div>
+
+    <!-- Common JavaScript -->
+    <script src="/static/js/index.js"></script>
+    <script src="/static/js/sidebar.js"></script>
+
+    <!-- Extra JavaScript -->
+    {% block extra_scripts %}{% endblock %}
+</body>
+
+</html>
