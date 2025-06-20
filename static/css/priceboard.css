@@ -44,6 +44,49 @@
     display: block;
 }
 
+/* Period text styles for dark mode */
+.period-text {
+    color: var(--color-dark-variant);
+    font-weight: 500;
+    font-size: 0.9em;
+}
+
+/* Plot container styles for dark mode compatibility */
+.plot-container.plotly {
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+}
+
+/* Stock table scroll container */
+.stock-scroll-container {
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid var(--color-light);
+    /* border-radius: var(--card-border-radius); */
+    background: var(--color-white);
+}
+
+/* Custom scrollbar for stock table */
+.stock-scroll-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.stock-scroll-container::-webkit-scrollbar-track {
+    background: var(--color-light);
+    border-radius: 4px;
+}
+
+.stock-scroll-container::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 4px;
+}
+
+.stock-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: var(--color-dark-variant);
+}
+
 /* Index card styles */
 .index-card {
     background: var(--color-white);
@@ -91,11 +134,13 @@
 }
 
 .index-change.positive {
-    color: var(--color-success);
+    color: var(--color-success) !important;
+    font-weight: bold !important;
 }
 
 .index-change.negative {
-    color: var(--color-danger);
+    color: var(--color-danger) !important;
+    font-weight: bold !important;
 }
 
 .mini-chart {
@@ -188,11 +233,13 @@
 }
 
 .stock-table .positive {
-    color: var(--color-success);
+    color: var(--color-success) !important;
+    font-weight: bold !important;
 }
 
 .stock-table .negative {
-    color: var(--color-danger);
+    color: var(--color-danger) !important;
+    font-weight: bold !important;
 }
 
 /* Loading and error states */
@@ -521,13 +568,13 @@
 }
 
 .index-change.positive {
-    color: #198754;
-    /* Màu xanh lá đậm hơn */
+    color: var(--color-success) !important;
+    font-weight: bold !important;
 }
 
 .index-change.negative {
-    color: #dc3545;
-    /* Màu đỏ */
+    color: var(--color-danger) !important;
+    font-weight: bold !important;
 }
 
 .mini-chart {
@@ -567,23 +614,23 @@
     color: var(--color-dark);
 }
 
+/* Updated stock table container - removed duplicate styles */
 #stock-table-container {
-    max-height: 400px;
-    overflow-y: auto;
+    /* Using .stock-scroll-container class for styling */
 }
 
 #stock-table-container thead th {
     position: sticky;
     top: 0;
     background-color: var(--color-primary);
+    color: var(--color-white);
+    z-index: 10;
 }
 
 #stock-table-container table {
     width: 100%;
     border-collapse: collapse;
     background-color: var(--color-white);
-    box-shadow: var(--box-shadow);
-    border-radius: var(--card-border-radius);
 }
 
 #stock-table-container thead {
@@ -597,6 +644,22 @@
     padding: 12px 15px;
     text-align: center;
     border-bottom: 1px solid var(--color-light);
+}
+
+/* Dark mode compatibility for stock table */
+.dark-mode-variables #stock-table-container table {
+    background-color: var(--color-white);
+}
+
+.dark-mode-variables #stock-table-container th,
+.dark-mode-variables #stock-table-container td {
+    color: var(--color-dark);
+    border-bottom: 1px solid var(--color-light);
+}
+
+.dark-mode-variables .stock-scroll-container {
+    background: var(--color-white);
+    border: 1px solid var(--color-light);
 }
 
 /* News section styles */
@@ -624,7 +687,7 @@
     background-color: var(--color-light);
 }
 
-/* Error and status styles */
+/* Error and status styles - Fixed priority */
 .error {
     margin-top: 15px;
     color: var(--color-danger);
@@ -633,15 +696,16 @@
 }
 
 .positive {
-    color: var(--color-success);
-    font-weight: bold;
+    color: var(--color-success) !important;
+    font-weight: bold !important;
 }
 
 .negative {
-    color: var(--color-danger);
-    font-weight: bold;
+    color: var(--color-danger) !important;
+    font-weight: bold !important;
 }
 
 .neutral {
-    color: var(--color-dark-variant);
+    color: var(--color-dark-variant) !important;
+    font-weight: normal !important;
 }

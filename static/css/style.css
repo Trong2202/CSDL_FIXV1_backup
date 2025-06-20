@@ -627,15 +627,18 @@ main .stock_table {
 }
 
 .change.positive {
-    color: var(--color-success);
+    color: var(--color-success) !important;
+    font-weight: bold !important;
 }
 
 .change.negative {
-    color: var(--color-danger);
+    color: var(--color-danger) !important;
+    font-weight: bold !important;
 }
 
 .change.neutral {
-    color: var(--color-info-dark);
+    color: var(--color-info-dark) !important;
+    font-weight: normal !important;
 }
 
 .volume-info {
@@ -662,3 +665,50 @@ main .stock_table {
 }
 
 /* CSS ANALYTICS */
+
+/* ================= MATERIAL ICONS & SYMBOLS GLOBAL STYLES ================= */
+
+/* Material Icons Sharp */
+.material-icons-sharp {
+    font-family: 'Material Icons Sharp';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'liga';
+}
+
+/* Material Symbols Outlined */
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'liga';
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+}
+
+/* ================= ROOT VARIABLES ================= */
