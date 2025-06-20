@@ -125,7 +125,7 @@ b {
     width: 96%;
     margin: 0 auto;
     gap: 1rem;
-    grid-template-rows: 3rem auto;
+    grid-template-rows: 4rem auto;
     grid-template-columns: 12rem 1fr;
 }
 
@@ -235,6 +235,7 @@ aside .close {
 }
 
 aside .sidebar {
+    width: 12vw;
     display: flex;
     flex-direction: column;
     border-radius: 15px;
@@ -404,7 +405,7 @@ main table tbody td {
     justify-content: center;
     align-items: center;
     padding: 2rem;
-    font-size: 1.2rem;  
+    font-size: 1.2rem;
     color: var(--color-primary);
     background: var(--color-background);
     border-radius: var(--card-border-radius);
