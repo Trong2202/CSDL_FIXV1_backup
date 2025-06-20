@@ -33,7 +33,7 @@
                 <a href="#" class="logo" target="logo">
                     <span class="material-symbols-outlined" style="color: rgb(77, 1, 147);">
                         bar_chart
-                        </span>
+                    </span>
                     <h2 style="font-weight: bold;">StockDashboard<span class="danger"></span></h2>
                 </a>
             </div>
@@ -109,7 +109,7 @@
         <!-- End of Sidebar Section -->
 
         <!-- Main Content -->
-        <main id="main">
+        <main id="main" style="transition: opacity 0.3s ease;">
             {% block main_content %}
             <div class="layout_template">
                 <h1>Nội dung chính</h1>
@@ -123,6 +123,9 @@
     <!-- Performance Enhanced Scripts -->
     <!-- Load Data Manager first -->
     <script src="/static/js/data-manager.js?v=1"></script>
+
+    <!-- SPA Navigation Manager -->
+    <script src="/static/js/spa-navigation.js?v=1"></script>
 
     <!-- Common JavaScript -->
     <script src="/static/js/index.js?v=2"></script>

@@ -16,8 +16,144 @@ class DataManager {
 
     async init() {
         console.log('🚀 DataManager initialized');
+        
+        // Listen for SPA content changes
+        this.setupSPAListeners();
+        
         // Preload critical data on first page load
         await this.preloadCriticalData();
+    }
+
+    /**
+     * Setup listeners for SPA navigation events
+     */
+    setupSPAListeners() {
+        // Listen for SPA content changes
+        window.addEventListener('spaContentChanged', (event) => {
+            const { path } = event.detail;
+            console.log('📄 SPA content changed:', path);
+            
+            // Trigger page-specific data loading if needed
+            this.handlePageSpecificData(path);
+        });
+        
+        // Listen for before navigation to preload data
+        window.addEventListener('spaBeforeNavigate', (event) => {
+            const { path } = event.detail;
+            console.log('🚀 Preloading data for:', path);
+            this.preloadPageData(path);
+        });
+    }
+
+    /**
+     * Handle page-specific data loading after SPA navigation
+     */
+    async handlePageSpecificData(path) {
+        try {
+            switch (path) {
+                case '/priceboard':
+                case '/':
+                    await this.loadPriceboardData();
+                    break;
+                case '/information':
+                    await this.loadInformationData();
+                    break;
+                case '/analytics':
+                    await this.loadAnalyticsData();
+                    break;
+                default:
+                    if (path.startsWith('/stock')) {
+                        await this.loadStockData(path);
+                    }
+                    break;
+            }
+        } catch (error) {
+            console.warn('⚠️ Error loading page-specific data:', error);
+        }
+    }
+
+    /**
+     * Preload data for specific pages
+     */
+    async preloadPageData(path) {
+        const criticalEndpoints = this.getCriticalEndpointsForPage(path);
+        
+        if (criticalEndpoints.length > 0) {
+            const preloadPromises = criticalEndpoints.map(endpoint => 
+                this.fetch(endpoint, { preload: true, priority: 'low' })
+            );
+            
+            Promise.allSettled(preloadPromises).then(() => {
+                console.log('✅ Page data preloaded for:', path);
+            });
+        }
+    }
+
+    /**
+     * Get critical endpoints for each page
+     */
+    getCriticalEndpointsForPage(path) {
+        const endpointMap = {
+            '/priceboard': ['/api/index/all', '/api/market-cap', '/api/news'],
+            '/information': ['/api/financial/data'],
+            '/analytics': ['/api/analytics/data'],
+            '/stock': ['/api/stock/data']
+        };
+        
+        if (path.startsWith('/stock')) {
+            return endpointMap['/stock'] || [];
+        }
+        
+        return endpointMap[path] || [];
+    }
+
+    /**
+     * Load priceboard-specific data
+     */
+    async loadPriceboardData() {
+        const endpoints = [
+            '/api/index/all',
+            '/api/market-cap',
+            '/api/news'
+        ];
+        
+        return this.fetchBatch(endpoints);
+    }
+
+    /**
+     * Load information page data
+     */
+    async loadInformationData() {
+        const endpoints = [
+            '/api/financial/data'
+        ];
+        
+        return this.fetchBatch(endpoints);
+    }
+
+    /**
+     * Load analytics page data
+     */
+    async loadAnalyticsData() {
+        const endpoints = [
+            '/api/analytics/data'
+        ];
+        
+        return this.fetchBatch(endpoints);
+    }
+
+    /**
+     * Load stock page data
+     */
+    async loadStockData(path) {
+        const url = new URL(path, window.location.origin);
+        const bankCode = url.searchParams.get('bank_code') || 'VCB';
+        
+        const endpoints = [
+            `/api/stock/data?bank_code=${bankCode}`
+        ];
+        
+        return this.fetchBatch(endpoints);
     }
 
     /**
@@ -146,12 +282,22 @@ class DataManager {
     }
 
     /**
-     * Clear cache
+     * Clear cache with optional pattern matching
      */
-    clearCache() {
-        this.cache.clear();
-        this.preloadedData.clear();
-        console.log('🗑️ Cache cleared');
+    clearCache(pattern = null) {
+        if (!pattern) {
+            this.cache.clear();
+            this.preloadedData.clear();
+            console.log('🗑️ All cache cleared');
+        } else {
+            // Clear cache entries matching pattern
+            const keysToDelete = Array.from(this.cache.keys()).filter(key => 
+                key.includes(pattern)
+            );
+            
+            keysToDelete.forEach(key => this.cache.delete(key));
+            console.log(`🗑️ Cache cleared for pattern: ${pattern} (${keysToDelete.length} items)`);
+        }
     }
 
     /**
@@ -190,6 +336,25 @@ class DataManager {
 
     async getTotalCapital(year, quarter, lineItemId) {
         return this.fetch(`/api/capital/total?year=${year}&quarter=${quarter}&line_item_id=${lineItemId}`);
+    }
+
+    /**
+     * Invalidate cache for specific pages
+     */
+    invalidatePageCache(path) {
+        if (path.startsWith('/stock')) {
+            this.clearCache('stock');
+        } else {
+            this.clearCache(path.replace('/', ''));
+        }
+    }
+
+    /**
+     * Refresh data for current page
+     */
+    async refreshPageData(path) {
+        this.invalidatePageCache(path);
+        await this.handlePageSpecificData(path);
     }
 }
 
